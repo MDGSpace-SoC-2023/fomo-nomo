@@ -1,0 +1,10 @@
+{
+    "manifest_version": 2,
+    "name" : "Fomonomo",
+    "description" : "summarisation + sentiment analysis extension",
+    "version": "1",
+    "browser_action": {
+
+        
+    }
+}
