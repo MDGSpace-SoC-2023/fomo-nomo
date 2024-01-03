@@ -14,6 +14,7 @@ def generate_summary(data):
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=f"Summarize the following information in 150 words:\n{data}",
+        max_tokens=600
     )
     return response.choices[0].text
 
@@ -22,7 +23,7 @@ def search_api():
     query = request.args.get('query')
     all_data = []
 
-    for j in search(query, tld="co.in", num=2, stop=2, pause=2):
+    for j in search(query, tld="co.in", num=1, stop=1, pause=2):
         data = requests.get(j)
         soup1 = BeautifulSoup(data.text, 'html.parser')
         title = soup1.find('h1')
