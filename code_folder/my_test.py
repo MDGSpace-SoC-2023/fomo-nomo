@@ -23,7 +23,7 @@ def search_api():
     query = request.args.get('query')
     all_data = []
 
-    for j in search(query, tld="co.in", num=1, stop=1, pause=2):
+    for j in search(query, tld="co.in", num=5, stop=5, pause=2):
         data = requests.get(j)
         soup1 = BeautifulSoup(data.text, 'html.parser')
         title = soup1.find('h1')
@@ -37,8 +37,8 @@ def search_api():
             paras = soup1.find_all('p')
 
             if paras:
-                paras_comb = '\n'.join(para.text.strip() for para in paras)
-                link_data = {'title': title, 'url': j, 'content': paras_comb}
+                paras_comb = '\n'.join(para.text.strip() for para in paras[:5])
+                link_data = { 'content': paras_comb}
                 all_data.append(link_data)
             else:
                 print("No paragraphs found.")
@@ -47,7 +47,7 @@ def search_api():
 
     json_data = json.dumps(all_data, indent=2)
     summary_text = generate_summary(json_data)
-    return jsonify({'summary': summary_text})
+    return jsonify(json_data, {'summary': summary_text})
 
 @app.route('/favicon.ico')
 def favicon():
