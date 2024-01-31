@@ -7,17 +7,21 @@ import openai
 from dotenv import load_dotenv
 from flask_cors import CORS
 import os
+
 load_dotenv()
-openai.api_key=os.environ.get("OPENAI_API_KEY")
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+
 app = Flask(__name__)
-CORS(app, origins =["chrome-extension://mommponkihhanlclfgndempjbfboafph"])
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 
 
 def generate_summary(data):
     response = openai.Completion.create(
         engine="gpt-3.5-turbo-instruct",
         prompt=f"Summarize the following information in 150 words:\n{data}",
-        max_tokens=600
+        max_tokens=600,
+        n=1
     )
     return response.choices[0].text
 
