@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name" : "Fomonomo",
+    "description" : "summarisation + sentiment analysis extension",
+    "version": "1",
+    "action": {
+        "default_popup": "popup.html"
+    },
+   
+
+    "permissions": ["activeTab"]
+}
