@@ -52,9 +52,6 @@ def search_api():
     summary_text = generate_summary(json_data)
     return jsonify({'summary': summary_text})
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(app.root_path, 'static/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == '__main__':
     app.run(debug=True)
